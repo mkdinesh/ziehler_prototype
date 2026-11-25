@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ziehler Lawn Care | Lawn Care in Dayton, Cincinnati &amp; Columbus, OH</title>
+<meta name="description" content="Homepage redesign concept for Ziehler Lawn Care: professional lawn care, pest control and tree &amp; shrub care across Dayton, Cincinnati and Columbus, Ohio.">
+<meta name="theme-color" content="#0c2418">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/hero.jpg">
+
+<style>
+/* ==========================================================================
+   1. DESIGN TOKENS
+   ========================================================================== */
+:root{
+  --forest-950:#08190f;
+  --forest-900:#0c2418;
+  --forest-800:#123322;
+  --forest-700:#1e352a;
+  --brand:#006d38;          /* Ziehler logo green */
+  --brand-600:#0a7e44;
+  --lawn:#86c440;           /* fresh lawn green (primary CTA) */
+  --lawn-600:#74b131;
+  --lawn-100:#e8f4d9;
+  --gold:#d6ad33;           /* Ziehler logo gold */
+  --cream:#faf7f0;
+  --cream-2:#f3eee2;
+  --sand:#e6dfcd;
+  --white:#ffffff;
+  --ink:#13241b;
+  --muted:#56655c;
+  --line:rgba(19,36,27,.10);
+  --line-light:rgba(255,255,255,.14);
+
+  --font-display:"Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:"Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --radius-sm:12px;
+  --radius:20px;
+  --radius-lg:32px;
+  --shadow-sm:0 1px 2px rgba(12,36,24,.06), 0 4px 12px rgba(12,36,24,.06);
+  --shadow:0 2px 6px rgba(12,36,24,.05), 0 18px 40px -12px rgba(12,36,24,.18);
+  --shadow-lg:0 30px 80px -20px rgba(8,25,15,.35);
+
+  --container:1240px;
+  --gutter:clamp(20px, 4vw, 40px);
+  --section:clamp(64px, 8vw, 112px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --header-h:84px;
+}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + 12px);-webkit-text-size-adjust:100%}
+body{margin:0;font-family:var(--font-body);font-size:17px;line-height:1.65;color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0;padding:0}
+svg.i{width:1em;height:1em;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:3px solid var(--lawn);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;left:16px;top:-60px;z-index:200;background:var(--forest-900);color:#fff;padding:10px 16px;border-radius:10px;transition:top .2s}
+.skip-link:focus{top:16px}
+
+.container{width:100%;max-width:calc(var(--container) + var(--gutter)*2);margin-inline:auto;padding-inline:var(--gutter)}
+.section{padding-block:var(--section)}
+
+h1,h2,h3,h4{font-family:var(--font-display);font-weight:500;line-height:1.08;letter-spacing:-.02em;margin:0;font-variation-settings:"opsz" 72}
+h2{font-size:clamp(2.1rem, 4.6vw, 3.6rem)}
+h3{font-size:clamp(1.35rem, 2vw, 1.6rem);letter-spacing:-.01em}
+p{margin:0}
+h1 em,h2 em{font-style:italic;font-weight:400;color:var(--brand)}
+.on-dark h2 em,.on-dark h1 em{color:var(--lawn)}
+
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.78rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--brand);margin-bottom:20px}
+.eyebrow::before{content:"";width:28px;height:2px;background:currentColor;border-radius:2px}
+.on-dark .eyebrow{color:var(--lawn)}
+.lead{font-size:clamp(1.05rem, 1.4vw, 1.2rem);color:var(--muted);line-height:1.7}
+.on-dark .lead{color:rgba(255,255,255,.75)}
+
+/* Buttons */
+.btn{--h:56px;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:var(--h);padding:0 28px;border-radius:999px;font-weight:700;font-size:1rem;letter-spacing:.005em;white-space:nowrap;transition:transform .25s var(--ease), background-color .25s, box-shadow .25s, color .25s, border-color .25s;will-change:transform}
+.btn .i{font-size:1.1em;transition:transform .25s var(--ease)}
+.btn:hover .i-arrow{transform:translateX(4px)}
+.btn-primary{background:var(--lawn);color:var(--forest-900);box-shadow:0 10px 24px -10px rgba(116,177,49,.8)}
+.btn-primary:hover{background:var(--lawn-600);transform:translateY(-2px);box-shadow:0 16px 30px -12px rgba(116,177,49,.9)}
+.btn-dark{background:var(--forest-900);color:#fff}
+.btn-dark:hover{background:var(--brand);transform:translateY(-2px)}
+.btn-ghost{border:1.5px solid rgba(255,255,255,.45);color:#fff;backdrop-filter:blur(6px);background:rgba(255,255,255,.06)}
+.btn-ghost:hover{background:#fff;color:var(--forest-900);border-color:#fff}
+.btn-outline{border:1.5px solid var(--forest-900);color:var(--forest-900)}
+.btn-outline:hover{background:var(--forest-900);color:#fff}
+.btn-sm{--h:46px;padding:0 20px;font-size:.93rem}
+
+.link-arrow{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--brand);border-bottom:1.5px solid transparent;transition:gap .25s var(--ease), border-color .25s}
+.link-arrow:hover{gap:12px;border-color:currentColor}
+.on-dark .link-arrow{color:var(--lawn)}
+
+/* Reveal animations (only when JS is running) */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease), transform .9s var(--ease)}
+.js .reveal.is-visible{opacity:1;transform:none}
+.js .reveal[data-delay="1"]{transition-delay:.1s}
+.js .reveal[data-delay="2"]{transition-delay:.2s}
+.js .reveal[data-delay="3"]{transition-delay:.3s}
+
+/* ==========================================================================
+   3. HEADER
+   ========================================================================== */
+.topbar{background:var(--forest-950);color:rgba(255,255,255,.78);font-size:.82rem;position:relative;z-index:61}
+.topbar .container{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:40px}
+.topbar-left{display:flex;align-items:center;gap:22px}
+.topbar-left span{display:inline-flex;align-items:center;gap:7px}
+.topbar .i{color:var(--lawn);font-size:15px}
+.topbar a:hover{color:#fff}
+.topbar-right{display:flex;gap:20px;align-items:center}
+@media (max-width:760px){.topbar-left .topbar-hours,.topbar-right{display:none}.topbar .container{justify-content:center}}
+
+.site-header{position:sticky;top:0;z-index:60;height:var(--header-h);margin-bottom:calc(var(--header-h) * -1);transition:background-color .35s, box-shadow .35s, height .35s}
+.site-header .container{height:100%;display:flex;align-items:center;gap:24px}
+.site-header.is-solid{background:rgba(250,247,240,.92);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);box-shadow:0 1px 0 var(--line), 0 10px 30px -18px rgba(12,36,24,.25)}
+.logo{display:flex;align-items:center;flex-shrink:0}
+.logo img{height:52px;width:auto;transition:height .35s}
+.is-solid .logo img{height:46px}
+
+.main-nav{margin-left:auto}
+.main-nav ul{list-style:none;display:flex;gap:4px;margin:0;padding:0}
+.main-nav a{position:relative;display:block;padding:10px 13px;font-weight:600;font-size:.95rem;color:#fff;border-radius:999px;transition:color .25s, background-color .25s}
+.main-nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:5px;height:2px;border-radius:2px;background:var(--lawn);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.main-nav a:hover::after,.main-nav a.is-active::after{transform:scaleX(1)}
+.is-solid .main-nav a{color:var(--ink)}
+
+.header-actions{display:flex;align-items:center;gap:14px}
+.header-phone{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:#fff;font-size:.95rem;transition:color .25s}
+.header-phone .icon-circle{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(255,255,255,.35);transition:all .25s}
+.header-phone:hover .icon-circle{background:var(--lawn);border-color:var(--lawn);color:var(--forest-900)}
+.header-phone small{display:block;font-size:.72rem;font-weight:600;opacity:.7;letter-spacing:.04em;line-height:1.1}
+.is-solid .header-phone{color:var(--ink)}
+.is-solid .header-phone .icon-circle{border-color:var(--line)}
+
+.menu-toggle{display:none;width:48px;height:48px;border-radius:50%;place-items:center;color:#fff;border:1.5px solid rgba(255,255,255,.35);font-size:22px;transition:all .25s}
+.is-solid .menu-toggle{color:var(--ink);border-color:var(--line)}
+
+@media (max-width:1240px){.header-phone .phone-text{display:none}}
+@media (max-width:1100px){
+  .main-nav{display:none}
+  .menu-toggle{display:grid}
+  .header-actions{margin-left:auto}
+}
+@media (max-width:560px){
+  :root{--header-h:72px}
+  .logo img{height:44px}
+  .is-solid .logo img{height:40px}
+  .header-actions .btn{display:none}
+  .header-phone .icon-circle{width:44px;height:44px}
+}
+
+/* Mobile menu */
+.mobile-menu{position:fixed;inset:0;z-index:90;visibility:hidden;pointer-events:none}
+.mobile-menu.is-open{visibility:visible;pointer-events:auto}
+.mobile-menu__backdrop{position:absolute;inset:0;background:rgba(8,25,15,.55);opacity:0;transition:opacity .35s}
+.mobile-menu__panel{position:absolute;top:0;right:0;height:100%;width:min(420px,100%);background:var(--forest-900);color:#fff;display:flex;flex-direction:column;padding:22px 24px 28px;transform:translateX(100%);transition:transform .45s var(--ease);overflow-y:auto}
+.mobile-menu.is-open .mobile-menu__backdrop{opacity:1}
+.mobile-menu.is-open .mobile-menu__panel{transform:none}
+.mobile-menu__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}
+.mobile-menu__head img{height:44px}
+.mobile-menu__close{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;border:1.5px solid var(--line-light);font-size:22px;color:#fff}
+.mobile-menu nav ul{list-style:none;margin:0;padding:0}
+.mobile-menu nav a{display:flex;align-items:center;justify-content:space-between;padding:16px 4px;font-family:var(--font-display);font-size:1.6rem;border-bottom:1px solid var(--line-light);opacity:0;transform:translateX(20px);transition:opacity .4s, transform .4s var(--ease), color .2s}
+.mobile-menu nav a .i{font-size:20px;color:var(--lawn)}
+.mobile-menu nav a:hover{color:var(--lawn)}
+.mobile-menu.is-open nav a{opacity:1;transform:none}
+.mobile-menu.is-open nav li:nth-child(2) a{transition-delay:.04s}
+.mobile-menu.is-open nav li:nth-child(3) a{transition-delay:.08s}
+.mobile-menu.is-open nav li:nth-child(4) a{transition-delay:.12s}
+.mobile-menu.is-open nav li:nth-child(5) a{transition-delay:.16s}
+.mobile-menu.is-open nav li:nth-child(6) a{transition-delay:.2s}
+.mobile-menu__foot{margin-top:auto;padding-top:32px;display:grid;gap:12px}
+.mobile-menu__foot .btn{width:100%}
+.mobile-menu__foot p{font-size:.85rem;color:rgba(255,255,255,.6);text-align:center;margin-top:6px}
+
+/* ==========================================================================
+   4. HERO
+   ========================================================================== */
+.hero{position:relative;min-height:max(680px, min(100svh, 940px));display:flex;align-items:center;color:#fff;isolation:isolate;overflow:hidden;padding:calc(var(--header-h) + 40px) 0 170px}
+.hero__media{position:absolute;inset:0;z-index:-2}
+.hero__media img{width:100%;height:100%;object-fit:cover;object-position:62% 45%;transform:scale(1.06);animation:heroZoom 2.4s var(--ease) forwards}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  linear-gradient(90deg, rgba(8,25,15,.88) 0%, rgba(8,25,15,.72) 32%, rgba(8,25,15,.18) 62%, rgba(8,25,15,0) 80%),
+  linear-gradient(180deg, rgba(8,25,15,.45) 0%, rgba(8,25,15,0) 22%, rgba(8,25,15,0) 70%, rgba(8,25,15,.55) 100%)}
+.hero__content{max-width:660px}
+.hero__badge{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:.88rem;font-weight:600;margin-bottom:28px}
+.hero__badge-icon{width:30px;height:30px;border-radius:50%;background:var(--lawn);color:var(--forest-900);display:grid;place-items:center;font-size:16px}
+.hero h1{font-size:clamp(2.9rem, 7.2vw, 5.9rem);line-height:.98;letter-spacing:-.035em;margin-bottom:26px}
+.hero h1 em{display:block;color:var(--lawn)}
+.hero__text{font-size:clamp(1.05rem, 1.5vw, 1.25rem);color:rgba(255,255,255,.85);max-width:540px;margin-bottom:38px}
+.hero__ctas{display:flex;flex-wrap:wrap;gap:14px}
+.hero__meta{display:flex;align-items:center;gap:14px;margin-top:38px;font-size:.92rem;color:rgba(255,255,255,.8)}
+.hero__meta .stars{color:var(--gold)}
+.hero__meta strong{color:#fff}
+.hero__meta-sep{width:1px;height:20px;background:rgba(255,255,255,.3)}
+
+.hero__card{position:absolute;right:var(--gutter);bottom:150px;width:260px;padding:20px;border-radius:var(--radius);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);color:#fff;box-shadow:var(--shadow-lg)}
+.hero__card-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.hero__card .g-logo{width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center}
+.hero__card .g-logo svg{width:20px;height:20px}
+.hero__card-score{font-family:var(--font-display);font-size:2.2rem;line-height:1}
+.hero__card .stars{color:var(--gold);font-size:15px;display:flex;gap:2px}
+.hero__card p{font-size:.85rem;color:rgba(255,255,255,.8)}
+@media (min-width:1200px){.hero__card{right:max(var(--gutter), calc((100vw - var(--container))/2))}}
+@media (max-width:1023px){.hero__card{display:none}}
+
+
+@media (max-width:767px){
+  .hero{align-items:flex-end;min-height:max(720px, 100svh);padding-bottom:150px}
+  .hero__media img{object-position:68% 50%}
+  .hero::before{background:linear-gradient(180deg, rgba(8,25,15,.55) 0%, rgba(8,25,15,.12) 28%, rgba(8,25,15,.6) 55%, rgba(8,25,15,.94) 100%)}
+  .hero__ctas .btn{width:100%}
+  .hero__meta{flex-wrap:wrap;gap:8px 14px}
+}
+
+/* ==========================================================================
+   5. TRUST BAR
+   ========================================================================== */
+.trust{position:relative;z-index:5;margin-top:-96px}
+.trust__inner{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);display:grid;grid-template-columns:repeat(4,1fr);padding:10px}
+.trust__item{display:flex;align-items:center;gap:16px;padding:24px 22px;position:relative}
+.trust__item + .trust__item::before{content:"";position:absolute;left:0;top:24px;bottom:24px;width:1px;background:var(--line)}
+.trust__icon{width:56px;height:56px;border-radius:16px;background:var(--lawn-100);color:var(--brand);display:grid;place-items:center;font-size:26px;flex-shrink:0;transition:transform .35s var(--ease), background-color .35s, color .35s}
+.trust__item:hover .trust__icon{transform:rotate(-6deg) scale(1.05);background:var(--brand);color:#fff}
+.trust__value{font-family:var(--font-display);font-size:1.5rem;line-height:1.1;color:var(--forest-900)}
+.trust__label{font-size:.88rem;color:var(--muted);line-height:1.4;margin-top:3px}
+@media (max-width:1023px){
+  .trust__inner{grid-template-columns:repeat(2,1fr)}
+  .trust__item:nth-child(3)::before{display:none}
+  .trust__item:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:560px){
+  .trust{margin-top:-80px}
+  .trust__inner{grid-template-columns:1fr;padding:6px 4px}
+  .trust__item{padding:18px 18px}
+  .trust__item::before{display:none}
+  .trust__item + .trust__item{border-top:1px solid var(--line)}
+  .trust__icon{width:48px;height:48px;font-size:22px}
+  .trust__value{font-size:1.35rem}
+}
+
+/* ==========================================================================
+   6. INTRO
+   ========================================================================== */
+.intro__grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(48px, 7vw, 110px);align-items:center}
+.intro__media{position:relative;padding:0 12% 14% 0}
+.intro__img-main{border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:1/1.02;box-shadow:var(--shadow)}
+.intro__img-main img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.intro__media:hover .intro__img-main img{transform:scale(1.04)}
+.intro__img-sub{position:absolute;right:0;bottom:0;width:46%;aspect-ratio:1;border-radius:var(--radius);overflow:hidden;border:8px solid var(--cream);box-shadow:var(--shadow-lg)}
+.intro__img-sub img{width:100%;height:100%;object-fit:cover}
+.intro__chip{position:absolute;left:-18px;top:12%;background:var(--forest-900);color:#fff;border-radius:18px;padding:16px 20px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow-lg);max-width:250px}
+.intro__chip strong{display:block;font-family:var(--font-display);font-size:1.7rem;font-weight:500;line-height:1;color:var(--lawn)}
+.intro__chip span{font-size:.82rem;line-height:1.35;color:rgba(255,255,255,.8)}
+.intro__leaf{position:absolute;left:-40px;bottom:6%;width:150px;height:150px;border-radius:50%;background:radial-gradient(circle, var(--lawn-100) 0 60%, transparent 61%);z-index:-1}
+.intro__content h2{margin-bottom:24px}
+.intro__content .lead{margin-bottom:18px}
+.intro__content p + p{margin-top:0}
+.checklist{list-style:none;padding:0;margin:30px 0 38px;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.checklist li{display:flex;gap:12px;align-items:flex-start;font-weight:600;font-size:.97rem;line-height:1.45}
+.checklist .tick{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:14px;flex-shrink:0;margin-top:-1px}
+@media (max-width:900px){
+  .intro__grid{grid-template-columns:1fr}
+  .intro__media{max-width:560px;margin-inline:auto;width:100%}
+  .intro__chip{left:-6px}
+}
+@media (max-width:520px){.checklist{grid-template-columns:1fr}.intro__chip{top:6%;padding:12px 14px}.intro__chip strong{font-size:1.4rem}}
+
+/* ==========================================================================
+   7. SERVICES
+   ========================================================================== */
+.services{background:var(--cream-2);position:relative;overflow:hidden}
+.services::before{content:"";position:absolute;right:-180px;top:-180px;width:520px;height:520px;border-radius:50%;border:1px solid var(--sand);box-shadow:0 0 0 60px rgba(230,223,205,.25), 0 0 0 120px rgba(230,223,205,.15)}
+.section-head{display:grid;grid-template-columns:1.2fr 1fr;gap:40px;align-items:end;margin-bottom:clamp(44px, 6vw, 72px);position:relative}
+.section-head .lead{max-width:470px;justify-self:end}
+@media (max-width:900px){.section-head{grid-template-columns:1fr;gap:18px}.section-head .lead{justify-self:start}}
+
+.services__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative}
+.service-card{position:relative;background:var(--white);border-radius:var(--radius-lg);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow-sm);transition:transform .5s var(--ease), box-shadow .5s var(--ease)}
+.service-card:nth-child(2){margin-top:56px}
+.service-card:hover{transform:translateY(-8px);box-shadow:var(--shadow-lg)}
+.service-card.is-highlight{box-shadow:0 0 0 3px var(--lawn), var(--shadow-lg)}
+.service-card__media{position:relative;aspect-ratio:4/3.1;overflow:hidden}
+.service-card__media img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.service-card:hover .service-card__media img{transform:scale(1.07)}
+.service-card__media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, transparent 55%, rgba(8,25,15,.45))}
+.service-card__tag{position:absolute;left:20px;top:20px;z-index:1;padding:6px 13px;border-radius:999px;background:rgba(255,255,255,.92);font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--forest-900)}
+.service-card__icon{position:absolute;right:24px;top:-32px;z-index:2;width:64px;height:64px;border-radius:20px;background:var(--brand);color:#fff;display:grid;place-items:center;font-size:28px;box-shadow:0 14px 28px -10px rgba(0,109,56,.6);transition:transform .5s var(--ease), background-color .3s}
+.service-card:hover .service-card__icon{transform:rotate(-8deg) scale(1.06);background:var(--forest-900)}
+.service-card__body{position:relative;padding:34px 30px 30px;display:flex;flex-direction:column;flex:1}
+.service-card h3{margin-bottom:12px}
+.service-card__desc{color:var(--muted);font-size:.97rem;margin-bottom:22px}
+.service-card ul{list-style:none;margin:0 0 28px;padding:0;display:grid;gap:10px}
+.service-card li{display:flex;gap:10px;align-items:center;font-weight:600;font-size:.95rem}
+.service-card li .i{color:var(--brand);font-size:18px}
+.service-card__foot{margin-top:auto;padding-top:22px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.service-card__quote{font-size:.88rem;font-weight:700;color:var(--muted);transition:color .2s}
+.service-card__quote:hover{color:var(--brand)}
+@media (max-width:1023px){
+  .services__grid{grid-template-columns:1fr 1fr}
+  .service-card:nth-child(2){margin-top:0}
+  .service-card:nth-child(3){grid-column:1/-1;flex-direction:row}
+  .service-card:nth-child(3) .service-card__media{flex:0 0 48%;aspect-ratio:auto}
+  .service-card:nth-child(3) .service-card__icon{top:24px}
+}
+@media (max-width:700px){
+  .services__grid{grid-template-columns:1fr}
+  .service-card:nth-child(3){flex-direction:column}
+  .service-card:nth-child(3) .service-card__media{flex:none;aspect-ratio:4/3.1}
+  .service-card:nth-child(3) .service-card__icon{top:-32px}
+  .service-card__body{padding:34px 24px 26px}
+}
+
+/* ==========================================================================
+   10. HOW IT WORKS
+   ========================================================================== */
+.steps-section{background:var(--white)}
+.steps-section .section-head{grid-template-columns:1fr;text-align:center;justify-items:center}
+.steps-section .section-head .lead{justify-self:center;text-align:center}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(24px, 4vw, 56px);position:relative;counter-reset:step}
+.steps::before{content:"";position:absolute;top:58px;left:calc(16.66% + 50px);right:calc(16.66% + 50px);height:2px;background:repeating-linear-gradient(90deg, var(--brand) 0 10px, transparent 10px 20px);opacity:.35}
+.step{text-align:center;position:relative}
+.step__badge{position:relative;width:116px;height:116px;margin:0 auto 30px;border-radius:50%;background:var(--cream);display:grid;place-items:center;transition:transform .5s var(--ease)}
+.step__badge::before{content:"";position:absolute;inset:-8px;border-radius:50%;border:1.5px dashed rgba(0,109,56,.3);transition:transform 1.2s var(--ease)}
+.step:hover .step__badge{transform:translateY(-6px)}
+.step:hover .step__badge::before{transform:rotate(90deg)}
+.step__badge .i{font-size:40px;color:var(--brand)}
+.step__num{position:absolute;right:-6px;top:-6px;width:44px;height:44px;border-radius:50%;background:var(--forest-900);color:var(--lawn);font-family:var(--font-display);font-size:1.05rem;display:grid;place-items:center;border:4px solid var(--white)}
+.step h3{position:relative;margin-bottom:12px;font-size:1.45rem}
+.step p{color:var(--muted);max-width:330px;margin:0 auto 18px;font-size:.98rem}
+.steps__cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:60px}
+@media (max-width:860px){
+  .steps{grid-template-columns:1fr;gap:56px;max-width:480px;margin-inline:auto}
+  .steps::before{top:116px;bottom:116px;left:50%;right:auto;width:2px;height:auto;background:repeating-linear-gradient(180deg, var(--brand) 0 10px, transparent 10px 20px);opacity:.2}
+  .step{background:var(--white)}
+}
+
+/* ==========================================================================
+   11. TESTIMONIALS
+   ========================================================================== */
+.reviews{background:var(--cream-2);position:relative;overflow:hidden}
+.reviews__grid{display:grid;grid-template-columns:380px 1fr;gap:clamp(28px, 4vw, 48px);align-items:stretch}
+.rating-card{background:var(--forest-900);color:#fff;border-radius:var(--radius-lg);padding:38px 34px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.rating-card::before{content:"";position:absolute;inset:auto -80px -80px auto;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle, rgba(134,196,64,.25), transparent 70%)}
+.rating-card__google{display:flex;align-items:center;gap:12px;font-weight:700;margin-bottom:28px}
+.rating-card__google .g-logo{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.rating-card__google .g-logo svg{width:24px;height:24px}
+.rating-card__google small{display:block;font-weight:500;font-size:.8rem;color:rgba(255,255,255,.65)}
+.rating-card__score{display:flex;align-items:flex-end;gap:14px;margin-bottom:8px}
+.rating-card__score strong{font-family:var(--font-display);font-weight:500;font-size:5.4rem;line-height:.85;letter-spacing:-.04em}
+.rating-card__score .stars{color:var(--gold);display:flex;gap:3px;font-size:22px;padding-bottom:8px}
+.rating-card__count{color:rgba(255,255,255,.75);margin-bottom:28px}
+.rating-card__count strong{color:#fff}
+.rating-card__links{border-top:1px solid var(--line-light);padding-top:22px;margin-top:auto;display:grid;gap:4px}
+.rating-card__links span{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px}
+.rating-card__links a{display:flex;justify-content:space-between;align-items:center;padding:9px 0;font-weight:600;color:rgba(255,255,255,.9);transition:color .2s, padding .25s var(--ease)}
+.rating-card__links a:hover{color:var(--lawn);padding-left:6px}
+.rating-card .btn{margin-top:22px;position:relative}
+
+.carousel{background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);padding:clamp(30px, 5vw, 56px);position:relative;display:flex;flex-direction:column;overflow:hidden}
+.carousel__quote-mark{position:absolute;right:clamp(24px, 4vw, 48px);top:clamp(20px, 3vw, 36px);font-size:110px;color:var(--lawn-100);stroke-width:1.2}
+.carousel__viewport{overflow:hidden;position:relative;flex:1}
+.carousel__track{display:flex;transition:transform .7s var(--ease);height:100%}
+.slide{flex:0 0 100%;min-width:0;display:flex;flex-direction:column;padding-right:4px}
+.slide .stars{color:var(--gold);display:flex;gap:4px;font-size:20px;margin-bottom:24px}
+.slide blockquote{margin:0 0 34px;font-family:var(--font-display);font-size:clamp(1.3rem, 2.3vw, 1.85rem);line-height:1.38;letter-spacing:-.012em;color:var(--forest-900);font-weight:400}
+.slide__author{margin-top:auto;display:flex;align-items:center;gap:16px}
+.avatar{width:54px;height:54px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1.05rem;letter-spacing:.02em;flex-shrink:0}
+.slide__author strong{display:block;font-size:1.05rem}
+.slide__meta{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.86rem;color:var(--muted)}
+.slide__meta span + span::before{content:"·";margin-right:10px;color:var(--sand)}
+.carousel__controls{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:38px;padding-top:26px;border-top:1px solid var(--line)}
+.carousel__dots{display:flex;gap:8px}
+.carousel__dot{width:10px;height:10px;border-radius:999px;background:var(--sand);transition:width .4s var(--ease), background-color .3s}
+.carousel__dot[aria-current="true"]{width:34px;background:var(--brand)}
+.carousel__arrows{display:flex;gap:10px}
+.carousel__btn{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:22px;color:var(--forest-900);transition:all .25s}
+.carousel__btn:hover{background:var(--forest-900);border-color:var(--forest-900);color:#fff}
+.carousel__counter{font-size:.86rem;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+@media (max-width:1023px){.reviews__grid{grid-template-columns:1fr}.rating-card__links{grid-template-columns:repeat(3,1fr);gap:4px 18px}.rating-card__links span{grid-column:1/-1}}
+@media (max-width:600px){.rating-card__links{grid-template-columns:1fr}.carousel__counter{display:none}.rating-card{padding:30px 24px}.slide__meta{flex-direction:column;gap:1px}.slide__meta span + span::before{display:none}.carousel__quote-mark{font-size:72px;opacity:.7}}
+
+/* ==========================================================================
+   12. SERVICE AREAS
+   ========================================================================== */
+.areas__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px, 6vw, 90px);align-items:center}
+.map-card{position:relative;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 50%, #fff 0 52%, var(--cream-2) 52.2% 66%, transparent 66.2%);display:grid;place-items:center;max-width:560px;margin-inline:auto;width:100%}
+.map-card::before,.map-card::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px dashed rgba(0,109,56,.22)}
+.map-card::after{inset:9%;border-style:solid;border-color:var(--sand)}
+.map-card img{width:66%;position:relative;z-index:1;filter:drop-shadow(0 16px 24px rgba(12,36,24,.12))}
+.map-badge{position:absolute;z-index:3;left:2%;bottom:10%;background:var(--forest-900);color:#fff;border-radius:16px;padding:14px 18px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow-lg)}
+.map-badge .i{font-size:22px;color:var(--lawn)}
+.map-badge strong{display:block;font-size:.95rem}
+.map-badge span{font-size:.8rem;color:rgba(255,255,255,.7)}
+.areas__content h2{margin-bottom:20px}
+.area-list{display:grid;gap:14px;margin:34px 0}
+.area{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:20px 22px;border-radius:var(--radius);background:var(--white);border:1px solid var(--line);transition:transform .4s var(--ease), box-shadow .4s, border-color .3s}
+.area:hover{transform:translateX(6px);box-shadow:var(--shadow);border-color:rgba(0,109,56,.3)}
+.area__pin{width:50px;height:50px;border-radius:15px;background:var(--lawn-100);color:var(--brand);display:grid;place-items:center;font-size:22px;transition:background-color .3s, color .3s}
+.area:hover .area__pin{background:var(--brand);color:#fff}
+.area h3{font-size:1.3rem;margin-bottom:4px}
+.area p{font-size:.88rem;color:var(--muted);line-height:1.5}
+.area__go{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font-size:18px;transition:all .3s}
+.area:hover .area__go{background:var(--lawn);border-color:var(--lawn);color:var(--forest-900)}
+@media (max-width:900px){.areas__grid{grid-template-columns:1fr}.map-card{max-width:440px}}
+@media (max-width:480px){.area{grid-template-columns:auto 1fr;padding:18px}.area__go{display:none}}
+
+/* ==========================================================================
+   13. FINAL CTA
+   ========================================================================== */
+.final-cta{padding:0 var(--gutter) var(--section)}
+.final-cta__box{position:relative;max-width:1400px;margin-inline:auto;border-radius:clamp(24px, 3vw, 44px);overflow:hidden;color:#fff;isolation:isolate;padding:clamp(80px, 11vw, 150px) var(--gutter);text-align:center}
+.final-cta__box > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 88%;z-index:-2;transform:scale(1.08);transition:transform 6s linear}
+.final-cta__box.is-visible > img{transform:scale(1)}
+.final-cta__box::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at center, rgba(8,25,15,.5), rgba(8,25,15,.82))}
+.final-cta h2{font-size:clamp(2.3rem, 5.4vw, 4.4rem);max-width:900px;margin:0 auto 22px}
+.final-cta p{max-width:600px;margin:0 auto 40px;font-size:clamp(1.05rem, 1.5vw, 1.22rem);color:rgba(255,255,255,.84)}
+.final-cta__actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.final-cta__note{margin-top:28px;font-size:.86rem;color:rgba(255,255,255,.65);display:inline-flex;align-items:center;gap:8px}
+@media (max-width:560px){.final-cta__actions .btn{width:100%}}
+
+/* ==========================================================================
+   14. FOOTER
+   ========================================================================== */
+.site-footer{background:var(--forest-950);color:rgba(255,255,255,.72);padding-top:clamp(70px, 8vw, 100px);font-size:.95rem}
+.footer__grid{display:grid;grid-template-columns:1.5fr repeat(4,1fr);gap:40px}
+.footer__brand img{height:62px;margin-bottom:22px}
+.footer__brand p{max-width:330px;margin-bottom:26px;line-height:1.7}
+.socials{display:flex;gap:10px}
+.socials a{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-light);display:grid;place-items:center;font-size:19px;color:#fff;transition:all .25s}
+.socials a:hover{background:var(--lawn);border-color:var(--lawn);color:var(--forest-900);transform:translateY(-3px)}
+.footer__col h4{font-family:var(--font-body);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;font-weight:800;margin-bottom:20px}
+.footer__col ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+.footer__col a{transition:color .2s}
+.footer__col a:hover{color:var(--lawn)}
+.footer__contact li{display:flex;gap:10px;align-items:flex-start}
+.footer__contact .i{color:var(--lawn);margin-top:5px}
+.footer__contact strong{color:#fff;font-weight:700}
+.footer__bottom{margin-top:64px;border-top:1px solid var(--line-light);padding:26px 0 30px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;font-size:.86rem}
+.footer__bottom nav{display:flex;gap:22px}
+.footer__bottom a:hover{color:#fff}
+@media (max-width:1023px){.footer__grid{grid-template-columns:1fr 1fr 1fr}.footer__brand{grid-column:1/-1}}
+@media (max-width:600px){.footer__grid{grid-template-columns:1fr 1fr;gap:34px 24px}.footer__contact{grid-column:1/-1}}
+
+/* Mobile sticky CTA bar */
+.mobile-cta{position:fixed;left:12px;right:12px;bottom:12px;z-index:55;display:none;gap:10px;padding:8px;border-radius:999px;background:rgba(12,36,24,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);box-shadow:var(--shadow-lg);transform:translateY(140%);transition:transform .45s var(--ease)}
+.mobile-cta.is-visible{transform:none}
+.mobile-cta .btn{flex:1;--h:50px;padding:0 16px}
+.mobile-cta .btn-call{flex:0 0 auto;width:50px;padding:0;background:rgba(255,255,255,.1);color:#fff}
+@media (max-width:767px){.mobile-cta{display:flex}.site-footer{padding-bottom:80px}}
+
+/* ==========================================================================
+   15. QUOTE MODAL
+   ========================================================================== */
+.modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;visibility:hidden;pointer-events:none}
+.modal.is-open{visibility:visible;pointer-events:auto}
+.modal__backdrop{position:absolute;inset:0;background:rgba(8,25,15,.6);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .35s}
+.modal.is-open .modal__backdrop{opacity:1}
+.modal__dialog{position:relative;width:min(980px,100%);max-height:calc(100dvh - 40px);overflow:auto;background:var(--white);border-radius:var(--radius-lg);box-shadow:0 40px 120px -20px rgba(0,0,0,.5);display:grid;grid-template-columns:.85fr 1fr;opacity:0;transform:translateY(24px) scale(.98);transition:opacity .4s var(--ease), transform .45s var(--ease)}
+.modal.is-open .modal__dialog{opacity:1;transform:none}
+.modal__aside{position:relative;color:#fff;padding:40px 36px;display:flex;flex-direction:column;isolation:isolate;overflow:hidden;min-height:100%}
+.modal__aside img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.modal__aside::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg, rgba(8,25,15,.55), rgba(8,25,15,.92))}
+.modal__aside img.logo-mark{position:static;width:auto;height:50px;margin-bottom:auto;z-index:1;align-self:flex-start}
+.modal__aside h3{font-size:1.9rem;margin:40px 0 16px}
+.modal__aside ul{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:12px;font-size:.95rem}
+.modal__aside li{display:flex;gap:10px;align-items:center}
+.modal__aside li .i{color:var(--lawn)}
+.modal__aside-call{padding-top:20px;border-top:1px solid var(--line-light);font-size:.9rem;color:rgba(255,255,255,.75)}
+.modal__aside-call a{display:block;font-family:var(--font-display);font-size:1.5rem;color:#fff}
+.modal__main{padding:44px 40px 38px;position:relative}
+.modal__close{position:absolute;right:18px;top:18px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--cream);transition:background-color .2s, transform .3s var(--ease);z-index:2}
+.modal__close:hover{background:var(--sand);transform:rotate(90deg)}
+.modal__main h2{font-size:clamp(1.8rem, 3vw, 2.3rem);margin-bottom:8px;padding-right:50px}
+#quoteFormWrap > p{color:var(--muted);margin-bottom:26px;font-size:.96rem}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field{display:flex;flex-direction:column;gap:7px}
+.field--full{grid-column:1/-1}
+.field label{font-size:.85rem;font-weight:700;color:var(--forest-900)}
+.field label .req{color:var(--brand)}
+.field input,.field select{height:54px;padding:0 16px;border-radius:14px;border:1.5px solid var(--sand);background:var(--cream);font-size:1rem;transition:border-color .2s, box-shadow .2s, background-color .2s;width:100%;min-width:0}
+.field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%231e352a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:44px}
+.field input:hover,.field select:hover{border-color:#d4cab2}
+.field input:focus,.field select:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 0 0 4px rgba(0,109,56,.12)}
+.field.is-invalid input,.field.is-invalid select{border-color:#c2410c;background:#fff7f3}
+.field__error{font-size:.8rem;color:#b13a0a;font-weight:600;min-height:0;display:none}
+.field.is-invalid .field__error{display:block}
+.form-foot{margin-top:24px;display:flex;flex-direction:column;gap:14px}
+.form-foot .btn{width:100%}
+.form-note{font-size:.78rem;color:var(--muted);text-align:center;display:flex;gap:8px;justify-content:center;align-items:center}
+.btn.is-loading{pointer-events:none;opacity:.85}
+.spinner{width:20px;height:20px;border-radius:50%;border:2.5px solid rgba(12,36,24,.25);border-top-color:var(--forest-900);animation:spin .7s linear infinite;display:none}
+.btn.is-loading .spinner{display:inline-block}
+.btn.is-loading .i{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.form-success{display:none;text-align:center;padding:40px 10px 10px}
+.form-success.is-shown{display:block;animation:pop .6s var(--ease)}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.form-success__icon{width:84px;height:84px;margin:0 auto 24px;border-radius:50%;background:var(--lawn-100);color:var(--brand);display:grid;place-items:center;font-size:42px}
+.form-success h2{padding-right:0}
+.form-success p{color:var(--muted);max-width:400px;margin:12px auto 0}
+.form-success .demo-note{margin-top:22px;display:inline-flex;gap:8px;align-items:center;padding:10px 16px;border-radius:12px;background:var(--cream-2);font-size:.82rem;font-weight:600;color:var(--forest-700)}
+.form-success .btn{margin-top:26px}
+@media (max-width:820px){
+  .modal{padding:0;place-items:end center}
+  .modal__dialog{grid-template-columns:1fr;border-radius:26px 26px 0 0;max-height:94dvh;transform:translateY(60px)}
+  .modal__aside{display:none}
+  .modal__main{padding:34px 22px 26px}
+}
+@media (max-width:480px){.form-grid{grid-template-columns:1fr}}
+
+
+body.no-scroll{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  html{scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- ======================= SVG ICON SPRITE (Lucide icon set) ======================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+    <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-award" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></symbol>
+    <symbol id="i-message" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+    <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></symbol>
+    <symbol id="i-sprout" viewBox="0 0 24 24"><path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/></symbol>
+    <symbol id="i-bug" viewBox="0 0 24 24"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c0 2.1-1.6 3.8-3.5 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></symbol>
+    <symbol id="i-trees" viewBox="0 0 24 24"><path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/></symbol>
+    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></symbol>
+    <symbol id="i-microscope" viewBox="0 0 24 24"><path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect width="8" height="4" x="8" y="2" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4M12 16h4M8 11h.01M8 16h.01"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-14.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z"/><path d="M15 5.764v15M9 3.236v15"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m16 11 2 2 4-4"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-chev-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-chev-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+    <symbol id="i-move" viewBox="0 0 24 24"><path d="m18 8 4 4-4 4M6 8l-4 4 4 4M2 12h20"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-login" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><path d="m10 17 5-5-5-5M15 12H3"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><path d="M17.5 6.5h.01"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+    <symbol id="i-google" viewBox="0 0 24 24"><path fill="#4285F4" stroke="none" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" stroke="none" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" stroke="none" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" stroke="none" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></symbol>
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ======================= 1. HEADER ======================= -->
+<div class="topbar">
+  <div class="container">
+    <div class="topbar-left">
+      <span><svg class="i"><use href="#i-pin"/></svg>Serving Dayton, Cincinnati &amp; Columbus, OH</span>
+      <span class="topbar-hours"><svg class="i"><use href="#i-clock"/></svg>Mon – Fri, 8am – 5pm</span>
+    </div>
+    <div class="topbar-right">
+      <a href="https://discoverziehler.com/lawn-care-101" target="_blank" rel="noopener">Learning Center</a>
+      <a href="https://discoverziehler.com/z-team-positions" target="_blank" rel="noopener">Careers</a>
+      <a href="https://www.lawngateway.com/Ziehler/Login_New.aspx" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px"><svg class="i"><use href="#i-login"/></svg>Customer Login</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="#top" class="logo" aria-label="Ziehler Lawn Care – home">
+      <img src="assets/logo.svg" alt="Ziehler Lawn Care" width="104" height="52">
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#service-lawn" data-highlight="service-lawn">Lawn Care</a></li>
+        <li><a href="#service-pest" data-highlight="service-pest">Pest Control</a></li>
+        <li><a href="#service-tree" data-highlight="service-tree">Tree &amp; Shrub Care</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#areas">Service Areas</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="tel:+19373129575" class="header-phone" aria-label="Call Ziehler Lawn Care at (937) 312-9575">
+        <span class="icon-circle"><svg class="i"><use href="#i-phone"/></svg></span>
+        <span class="phone-text"><small>Call us today</small>(937) 312-9575</span>
+      </a>
+      <button class="btn btn-primary btn-sm" data-open-quote>Get a Free Quote</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg class="i"><use href="#i-menu"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <div class="mobile-menu__backdrop" data-close-menu></div>
+  <div class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="mobile-menu__head">
+      <img src="assets/logo.svg" alt="Ziehler Lawn Care">
+      <button class="mobile-menu__close" data-close-menu aria-label="Close menu"><svg class="i"><use href="#i-x"/></svg></button>
+    </div>
+    <nav aria-label="Mobile">
+      <ul>
+        <li><a href="#service-lawn" data-highlight="service-lawn">Lawn Care <svg class="i"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#service-pest" data-highlight="service-pest">Pest Control <svg class="i"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#service-tree" data-highlight="service-tree">Tree &amp; Shrub Care <svg class="i"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#about">About Us <svg class="i"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#areas">Service Areas <svg class="i"><use href="#i-arrow"/></svg></a></li>
+        <li><a href="#contact">Contact <svg class="i"><use href="#i-arrow"/></svg></a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu__foot">
+      <button class="btn btn-primary" data-open-quote>Get My Free Quote <svg class="i i-arrow"><use href="#i-arrow"/></svg></button>
+      <a href="tel:+19373129575" class="btn btn-ghost"><svg class="i"><use href="#i-phone"/></svg>(937) 312-9575</a>
+      <p>Mon – Fri, 8am – 5pm</p>
+    </div>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ======================= 2. HERO ======================= -->
+<section class="hero on-dark" id="top" aria-labelledby="hero-title">
+  <div class="hero__media">
+    <img src="assets/img/hero.jpg" alt="A family playing catch on a thick, green Ziehler-treated lawn in front of their home" width="1680" height="810" fetchpriority="high">
+  </div>
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__badge reveal">
+        <span class="hero__badge-icon"><svg class="i"><use href="#i-leaf"/></svg></span>
+        27+ Years of Local Lawn Care Experience
+      </div>
+      <h1 id="hero-title" class="reveal" data-delay="1">Love Your Lawn. <em>Enjoy Your Home.</em></h1>
+      <p class="hero__text reveal" data-delay="2">Professional lawn care designed for healthier, greener lawns. Enjoy more time outside while our local experts take care of the science.</p>
+      <div class="hero__ctas reveal" data-delay="3">
+        <button class="btn btn-primary" data-open-quote>Get My Free Quote <svg class="i i-arrow"><use href="#i-arrow"/></svg></button>
+        <a href="#services" class="btn btn-ghost">Explore Our Services</a>
+      </div>
+      <div class="hero__meta reveal" data-delay="3">
+        <span class="stars" aria-hidden="true"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+        <span><strong>4.9</strong> from 3,500+ Google reviews</span>
+        <span class="hero__meta-sep" aria-hidden="true"></span>
+        <span>Dayton · Cincinnati · Columbus</span>
+      </div>
+    </div>
+  </div>
+
+  <aside class="hero__card" aria-label="Google rating">
+    <div class="hero__card-top">
+      <span class="g-logo"><svg><use href="#i-google"/></svg></span>
+      <span class="hero__card-score">4.9</span>
+      <span class="stars" aria-label="5 stars"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+    </div>
+    <p>Google rating based on 3,500+ reviews across our three service areas.</p>
+  </aside>
+</section>
+
+<!-- ======================= 3. TRUST BAR ======================= -->
+<section class="trust" aria-label="Why homeowners trust Ziehler">
+  <div class="container">
+    <div class="trust__inner reveal">
+      <div class="trust__item">
+        <span class="trust__icon"><svg class="i"><use href="#i-calendar"/></svg></span>
+        <div><div class="trust__value">27+ Years</div><div class="trust__label">In business · Locally owned &amp; operated</div></div>
+      </div>
+      <div class="trust__item">
+        <span class="trust__icon"><svg class="i"><use href="#i-star"/></svg></span>
+        <div><div class="trust__value">4.9-Star</div><div class="trust__label">Google rating</div></div>
+      </div>
+      <div class="trust__item">
+        <span class="trust__icon"><svg class="i"><use href="#i-message"/></svg></span>
+        <div><div class="trust__value">3,500+</div><div class="trust__label">Google customer reviews</div></div>
+      </div>
+      <div class="trust__item">
+        <span class="trust__icon"><svg class="i"><use href="#i-shield"/></svg></span>
+        <div><div class="trust__value">Trained &amp; Certified</div><div class="trust__label">Lawn care specialists</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 4. INTRODUCTION ======================= -->
+<section class="section intro" id="about" aria-labelledby="intro-title">
+  <div class="container intro__grid">
+    <div class="intro__media reveal">
+      <span class="intro__leaf" aria-hidden="true"></span>
+      <div class="intro__img-main">
+        <img src="assets/img/family.jpg" alt="A mother and daughter lying on soft green grass, smiling at each other" width="438" height="439" loading="lazy">
+      </div>
+      <div class="intro__img-sub">
+        <img src="assets/img/field.jpg" alt="A Ziehler Lawn Care sign placed in lush, weed-free grass" width="434" height="434" loading="lazy">
+      </div>
+      <div class="intro__chip">
+        <div><strong>Since 1999</strong><span>Founded in Centerville, Ohio</span></div>
+      </div>
+    </div>
+
+    <div class="intro__content">
+      <span class="eyebrow reveal">Life’s most important moments happen at home</span>
+      <h2 id="intro-title" class="reveal" data-delay="1">Your Lawn Deserves <em>Expert Care.</em></h2>
+      <p class="lead reveal" data-delay="2">Let go of the guesswork and get the yard you’ve been dreaming of. Our lawn fertilization and weed control programs are tailored to the growing conditions of Dayton, Cincinnati and Columbus.</p>
+      <p class="reveal" data-delay="2" style="color:var(--muted)">With 27+ years of experience, custom-blended products and ongoing local field research, we take care of the science behind your lawn — and keep you informed every step of the way.</p>
+      <ul class="checklist reveal" data-delay="3">
+        <li><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Products blended in-house, by season</li>
+        <li><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Backed by our own local research field</li>
+        <li><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Programs built for Ohio growing conditions</li>
+        <li><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Clear communication &amp; follow-up support</li>
+      </ul>
+      <div class="reveal" data-delay="3">
+        <a href="https://discoverziehler.com/ziehler-difference" target="_blank" rel="noopener" class="btn btn-dark">Discover the Ziehler Difference <svg class="i i-arrow"><use href="#i-arrow"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 5. SERVICES ======================= -->
+<section class="section services" id="services" aria-labelledby="services-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow reveal">Our Services</span>
+        <h2 id="services-title" class="reveal" data-delay="1">Complete Care for Your <em>Outdoor Spaces.</em></h2>
+      </div>
+      <p class="lead reveal" data-delay="2">From the grass under your feet to the trees and shrubs that frame your home — professional care for every part of your property.</p>
+    </div>
+
+    <div class="services__grid">
+      <!-- Lawn Care -->
+      <article class="service-card reveal" id="service-lawn">
+        <div class="service-card__media">
+          <span class="service-card__tag">3 Programs</span>
+          <img src="assets/img/backyard.jpg" alt="A thick, striped green backyard lawn behind suburban homes" loading="lazy" width="1600" height="476">
+        </div>
+        <div class="service-card__body">
+          <span class="service-card__icon"><svg class="i"><use href="#i-sprout"/></svg></span>
+          <h3>Lawn Care</h3>
+          <p class="service-card__desc">Grow a healthier, greener, weed-free lawn with custom-blended programs — choose from Signature, Premium or Ultimate.</p>
+          <ul>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Fertilization</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Weed Control</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Aeration</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Overseeding</li>
+          </ul>
+          <div class="service-card__foot">
+            <a href="https://discoverziehler.com/lawn-programs-pricing" target="_blank" rel="noopener" class="link-arrow">Learn More <svg class="i"><use href="#i-arrow"/></svg></a>
+            <button class="service-card__quote" data-open-quote data-service="Lawn Care">Get a quote</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Pest Control -->
+      <article class="service-card reveal" data-delay="1" id="service-pest">
+        <div class="service-card__media">
+          <img src="https://images.unsplash.com/photo-1527359443443-84a48aec73d2?auto=format&amp;fit=crop&amp;w=900&amp;q=75" alt="A backyard pergola with string lights ready for an evening outdoors" loading="lazy" width="900" height="700">
+        </div>
+        <div class="service-card__body">
+          <span class="service-card__icon"><svg class="i"><use href="#i-bug"/></svg></span>
+          <h3>Pest Control</h3>
+          <p class="service-card__desc">Enjoy more time outdoors with treatments that help manage mosquitoes, ants, fleas, ticks and other common pests around your property.</p>
+          <ul>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Mosquito Control</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Ant, Flea &amp; Tick Treatments</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Home Guard Pest Prevention</li>
+          </ul>
+          <div class="service-card__foot">
+            <a href="https://discoverziehler.com/pest-control" target="_blank" rel="noopener" class="link-arrow">Learn More <svg class="i"><use href="#i-arrow"/></svg></a>
+            <button class="service-card__quote" data-open-quote data-service="Pest Control">Get a quote</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tree & Landscape -->
+      <article class="service-card reveal" data-delay="2" id="service-tree">
+        <div class="service-card__media">
+          <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&amp;fit=crop&amp;w=900&amp;q=75" alt="Neatly maintained shrubs and flowering landscape beds along a garden path" loading="lazy" width="900" height="700">
+        </div>
+        <div class="service-card__body">
+          <span class="service-card__icon"><svg class="i"><use href="#i-trees"/></svg></span>
+          <h3>Tree &amp; Landscape Care</h3>
+          <p class="service-card__desc">Care for more than just your lawn — targeted treatments that support plant health and keep your landscape beds clean and maintained.</p>
+          <ul>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Tree &amp; Shrub Care</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Landscape Bed Weed Control</li>
+            <li><svg class="i"><use href="#i-check-circle"/></svg>Plant Health Treatments</li>
+          </ul>
+          <div class="service-card__foot">
+            <a href="https://discoverziehler.com/landscape" target="_blank" rel="noopener" class="link-arrow">Learn More <svg class="i"><use href="#i-arrow"/></svg></a>
+            <button class="service-card__quote" data-open-quote data-service="Tree &amp; Shrub Care">Get a quote</button>
+          </div>
+        </div>
+      </article>
+    </div>  </div>
+</section>
+
+<!-- ======================= 8. HOW IT WORKS ======================= -->
+<section class="section steps-section" aria-labelledby="steps-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow reveal">How to Get Started</span>
+        <h2 id="steps-title" class="reveal" data-delay="1">Your Dream Lawn <em>Starts Here.</em></h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Tell us about your property, explore your options and choose the lawn care program that works for you.</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <div class="step__badge"><svg class="i"><use href="#i-map"/></svg><span class="step__num">01</span></div>
+        <h3>Request Your Custom Quote</h3>
+        <p>Contact our team or request a quote online. We use aerial mapping technology to measure your lawn and prepare pricing based on your property.</p>
+      </li>
+      <li class="step reveal" data-delay="1">
+        <div class="step__badge"><svg class="i"><use href="#i-clipboard"/></svg><span class="step__num">02</span></div>
+        <h3>Choose Your Lawn Care Program</h3>
+        <p>Explore our Signature, Premium and Ultimate programs, then select the one that best fits your lawn goals — with help from our team.</p>
+      </li>
+      <li class="step reveal" data-delay="2">
+        <div class="step__badge"><svg class="i"><use href="#i-sun"/></svg><span class="step__num">03</span></div>
+        <h3>Enjoy Your Lawn!</h3>
+        <p>We coordinate your service and apply treatments according to your program, with communication and support along the way.</p>
+      </li>
+    </ol>
+
+    <div class="steps__cta reveal">
+      <button class="btn btn-primary" data-open-quote>Get My Free Quote <svg class="i i-arrow"><use href="#i-arrow"/></svg></button>
+      <a href="https://discoverziehler.com/lawn-programs-pricing" target="_blank" rel="noopener" class="btn btn-outline">Compare Lawn Care Programs</a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 9. TESTIMONIALS ======================= -->
+<section class="section reviews" id="reviews" aria-labelledby="reviews-title">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow reveal">Customer Reviews</span>
+        <h2 id="reviews-title" class="reveal" data-delay="1">Real Customers. Beautiful Lawns. <em>Happy Homes.</em></h2>
+      </div>
+      <p class="lead reveal" data-delay="2">Thousands of homeowners across Dayton, Cincinnati and Columbus trust Ziehler to keep their lawns green, healthy and weed-free — season after season.</p>
+    </div>
+
+    <div class="reviews__grid">
+      <aside class="rating-card reveal">
+        <div class="rating-card__google">
+          <span class="g-logo"><svg><use href="#i-google"/></svg></span>
+          <div>Google Reviews<small>Across all three service areas</small></div>
+        </div>
+        <div class="rating-card__score">
+          <strong>4.9</strong>
+          <span class="stars" role="img" aria-label="Rated 4.9 out of 5 stars"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+        </div>
+        <p class="rating-card__count">Based on <strong>3,500+ Google reviews</strong></p>
+        <div class="rating-card__links">
+          <span>Read local reviews</span>
+          <a href="https://discoverziehler.com/dayton-lawn-care-reviews" target="_blank" rel="noopener">Dayton <svg class="i"><use href="#i-arrow-up-right"/></svg></a>
+          <a href="https://discoverziehler.com/cincinnati-lawn-care-reviews" target="_blank" rel="noopener">Cincinnati <svg class="i"><use href="#i-arrow-up-right"/></svg></a>
+          <a href="https://discoverziehler.com/columbus-lawn-care-reviews" target="_blank" rel="noopener">Columbus <svg class="i"><use href="#i-arrow-up-right"/></svg></a>
+        </div>
+        <a href="https://www.google.com/search?q=Ziehler+Lawn+Care" target="_blank" rel="noopener" class="btn btn-ghost btn-sm">Leave Us a Review</a>
+      </aside>
+
+      <div class="carousel reveal" data-delay="1" id="carousel" role="region" aria-roledescription="carousel" aria-label="Customer testimonials">
+        <svg class="i carousel__quote-mark" aria-hidden="true"><use href="#i-quote"/></svg>
+        <div class="carousel__viewport">
+          <div class="carousel__track" id="carouselTrack">
+            <figure class="slide" role="group" aria-roledescription="slide" aria-label="1 of 3" style="margin:0">
+              <span class="stars" role="img" aria-label="5 star review"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+              <blockquote>“Josh is very professional and thorough. I have tried other lawn care companies but Ziehler is the best. My yard looks great. They will address any issues and always let me know in advance when they are coming.”</blockquote>
+              <figcaption class="slide__author">
+                <span class="avatar" aria-hidden="true">MF</span>
+                <div><strong>MaryAnn F.</strong><div class="slide__meta"><span>Signature Lawn Care Program</span><span>Blue Ash, OH</span><span>July 2026</span></div></div>
+              </figcaption>
+            </figure>
+            <figure class="slide" role="group" aria-roledescription="slide" aria-label="2 of 3" style="margin:0">
+              <span class="stars" role="img" aria-label="5 star review"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+              <blockquote>“Will makes sure to contact me when he arrives and asks if I have any questions about any of the treatments or processes. We’ll walk the property and he’ll explain what issues he sees with the yard and how he will be treating them. Yard already looks so much better than it did.”</blockquote>
+              <figcaption class="slide__author">
+                <span class="avatar" aria-hidden="true" style="background:var(--forest-700)">PO</span>
+                <div><strong>Patrick O.</strong><div class="slide__meta"><span>Ultimate Lawn Care Program</span><span>Plain City, OH</span><span>July 2026</span></div></div>
+              </figcaption>
+            </figure>
+            <figure class="slide" role="group" aria-roledescription="slide" aria-label="3 of 3" style="margin:0">
+              <span class="stars" role="img" aria-label="5 star review"><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg><svg class="i"><use href="#i-star"/></svg></span>
+              <blockquote>“We have used other lawn companies in the past but nothing has come close to the service we have had with Ziehler! They are incredibly thorough with providing details of services and our lawn has never looked better! We would recommend them to anyone!”</blockquote>
+              <figcaption class="slide__author">
+                <span class="avatar" aria-hidden="true" style="background:var(--lawn-600)">KK</span>
+                <div><strong>Kendall K.</strong><div class="slide__meta"><span>Signature Lawn Care Program</span><span>Dayton, OH</span><span>April 2026</span></div></div>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+        <div class="carousel__controls">
+          <div class="carousel__dots" id="carouselDots" role="tablist" aria-label="Choose testimonial"></div>
+          <span class="carousel__counter" id="carouselCounter" aria-live="polite">01 / 03</span>
+          <div class="carousel__arrows">
+            <button class="carousel__btn" id="prevBtn" aria-label="Previous testimonial"><svg class="i"><use href="#i-chev-left"/></svg></button>
+            <button class="carousel__btn" id="nextBtn" aria-label="Next testimonial"><svg class="i"><use href="#i-chev-right"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 10. SERVICE AREAS ======================= -->
+<section class="section areas" id="areas" aria-labelledby="areas-title">
+  <div class="container areas__grid">
+    <div class="reveal">
+      <div class="map-card">
+        <img src="assets/img/map.png" alt="Map of Ohio showing Ziehler service areas in Dayton, Cincinnati and Columbus" width="500" height="500" loading="lazy">
+        <div class="map-badge">
+          <svg class="i"><use href="#i-home"/></svg>
+          <div><strong>Locally owned</strong><span>Rooted in Centerville, OH</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="areas__content">
+      <span class="eyebrow reveal">Our Service Areas</span>
+      <h2 id="areas-title" class="reveal" data-delay="1">Local Experts. Serving Your <em>Neighborhood.</em></h2>
+      <p class="lead reveal" data-delay="2">Professional lawn fertilization and weed control, aeration and seeding, outdoor pest control and tree &amp; shrub care across three Ohio regions.</p>
+
+      <div class="area-list">
+        <a class="area reveal" data-delay="1" href="https://discoverziehler.com/ziehler-lawn-care-dayton" target="_blank" rel="noopener">
+          <span class="area__pin"><svg class="i"><use href="#i-pin"/></svg></span>
+          <div><h3>Dayton, Ohio</h3><p>Centerville, Beavercreek, Kettering, Springboro, Miamisburg, Oakwood, Huber Heights, Vandalia, Troy &amp; more</p></div>
+          <span class="area__go"><svg class="i"><use href="#i-arrow-up-right"/></svg></span>
+        </a>
+        <a class="area reveal" data-delay="2" href="https://discoverziehler.com/ziehler-lawn-care-cincinnati" target="_blank" rel="noopener">
+          <span class="area__pin"><svg class="i"><use href="#i-pin"/></svg></span>
+          <div><h3>Cincinnati, Ohio</h3><p>Mason, West Chester, Liberty Township, Blue Ash, Montgomery, Maineville, Fairfield &amp; more</p></div>
+          <span class="area__go"><svg class="i"><use href="#i-arrow-up-right"/></svg></span>
+        </a>
+        <a class="area reveal" data-delay="3" href="https://discoverziehler.com/ziehler-lawn-care-columbus" target="_blank" rel="noopener">
+          <span class="area__pin"><svg class="i"><use href="#i-pin"/></svg></span>
+          <div><h3>Columbus, Ohio</h3><p>Dublin, Powell, Upper Arlington, Westerville, Worthington, New Albany, Hilliard, Grove City &amp; more</p></div>
+          <span class="area__go"><svg class="i"><use href="#i-arrow-up-right"/></svg></span>
+        </a>
+      </div>
+      <a href="https://discoverziehler.com/service-areas" target="_blank" rel="noopener" class="link-arrow reveal">View all service areas <svg class="i"><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= 11. FINAL CTA ======================= -->
+<section class="final-cta on-dark" aria-labelledby="cta-title">
+  <div class="final-cta__box" id="finalCta">
+    <img src="https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&amp;fit=crop&amp;w=1800&amp;q=75" alt="" loading="lazy" width="1800" height="1200">
+    <span class="eyebrow reveal" style="justify-content:center">Get Started With Ziehler</span>
+    <h2 id="cta-title" class="reveal" data-delay="1">Let’s Make Your Lawn the <em>Best Part of Your Home.</em></h2>
+    <p class="reveal" data-delay="2">Get started with professional lawn care from a team that knows your local growing conditions.</p>
+    <div class="final-cta__actions reveal" data-delay="3">
+      <button class="btn btn-primary" data-open-quote>Get My Free Quote <svg class="i i-arrow"><use href="#i-arrow"/></svg></button>
+      <a href="tel:+19373129575" class="btn btn-ghost"><svg class="i"><use href="#i-phone"/></svg>Call Our Team</a>
+    </div>
+    <div class="final-cta__note reveal" data-delay="3"><svg class="i"><use href="#i-clock"/></svg>(937) 312-9575 · Monday – Friday, 8am – 5pm</div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================= 12. FOOTER ======================= -->
+<footer class="site-footer" id="contact">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <img src="assets/logo.svg" alt="Ziehler Lawn Care" width="124" height="62" loading="lazy">
+        <p>Locally owned and operated since 1999. Professional lawn care, outdoor pest control and tree &amp; shrub care for homeowners across Dayton, Cincinnati and Columbus, Ohio.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/ziehlerlawn/" target="_blank" rel="noopener" aria-label="Ziehler on Instagram"><svg class="i"><use href="#i-instagram"/></svg></a>
+          <a href="https://www.facebook.com/ziehler" target="_blank" rel="noopener" aria-label="Ziehler on Facebook"><svg class="i"><use href="#i-facebook"/></svg></a>
+          <a href="https://www.youtube.com/@ziehlerlawncare" target="_blank" rel="noopener" aria-label="Ziehler on YouTube"><svg class="i"><use href="#i-youtube"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer__col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="https://discoverziehler.com/lawn-programs-pricing" target="_blank" rel="noopener">Lawn Care Programs</a></li>
+          <li><a href="https://discoverziehler.com/aeration-and-seeding" target="_blank" rel="noopener">Aeration &amp; Seeding</a></li>
+          <li><a href="https://discoverziehler.com/lawn-enhancements" target="_blank" rel="noopener">Lawn Enhancements</a></li>
+          <li><a href="https://discoverziehler.com/mosquito-control" target="_blank" rel="noopener">Mosquito Control</a></li>
+          <li><a href="https://discoverziehler.com/pest-control" target="_blank" rel="noopener">Pest Control</a></li>
+          <li><a href="https://discoverziehler.com/tree-shrub" target="_blank" rel="noopener">Tree &amp; Shrub Care</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="https://discoverziehler.com/our-story" target="_blank" rel="noopener">Our Story</a></li>
+          <li><a href="https://discoverziehler.com/ziehler-difference" target="_blank" rel="noopener">The Ziehler Difference</a></li>
+          <li><a href="https://discoverziehler.com/ziehler-research-field" target="_blank" rel="noopener">Research Field</a></li>
+          <li><a href="https://discoverziehler.com/blog" target="_blank" rel="noopener">Blog</a></li>
+          <li><a href="https://discoverziehler.com/faqs" target="_blank" rel="noopener">FAQs</a></li>
+          <li><a href="https://discoverziehler.com/z-team-positions" target="_blank" rel="noopener">Careers</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h4>Service Areas</h4>
+        <ul>
+          <li><a href="https://discoverziehler.com/ziehler-lawn-care-dayton" target="_blank" rel="noopener">Dayton, OH</a></li>
+          <li><a href="https://discoverziehler.com/ziehler-lawn-care-cincinnati" target="_blank" rel="noopener">Cincinnati, OH</a></li>
+          <li><a href="https://discoverziehler.com/ziehler-lawn-care-columbus" target="_blank" rel="noopener">Columbus, OH</a></li>
+          <li><a href="https://discoverziehler.com/service-areas" target="_blank" rel="noopener">All Service Areas</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col footer__contact">
+        <h4>Contact</h4>
+        <ul>
+          <li><svg class="i"><use href="#i-phone"/></svg><div><a href="tel:+19373129575"><strong>(937) 312-9575</strong></a></div></li>
+          <li><svg class="i"><use href="#i-clock"/></svg><div>Monday – Friday<br>8am – 5pm</div></li>
+          <li><svg class="i"><use href="#i-login"/></svg><a href="https://www.lawngateway.com/Ziehler/Login_New.aspx" target="_blank" rel="noopener">Customer Login</a></li>
+          <li><svg class="i"><use href="#i-arrow"/></svg><button data-open-quote style="color:var(--lawn);font-weight:700">Get a Free Estimate</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>© 2026, Ziehler Lawn Care, Inc. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a href="https://discoverziehler.com/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>
+        <a href="https://discoverziehler.com/terms-conditions" target="_blank" rel="noopener">Terms &amp; Conditions</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<!-- Mobile sticky CTA -->
+<div class="mobile-cta" id="mobileCta">
+  <a href="tel:+19373129575" class="btn btn-call" aria-label="Call (937) 312-9575"><svg class="i"><use href="#i-phone"/></svg></a>
+  <button class="btn btn-primary" data-open-quote>Get My Free Quote <svg class="i i-arrow"><use href="#i-arrow"/></svg></button>
+</div>
+
+<!-- ======================= QUOTE MODAL ======================= -->
+<div class="modal" id="quoteModal" aria-hidden="true">
+  <div class="modal__backdrop" data-close-modal></div>
+  <div class="modal__dialog" role="dialog" aria-modal="true" aria-labelledby="quoteTitle">
+    <div class="modal__aside">
+      <img src="assets/img/backyard.jpg" alt="" aria-hidden="true">
+      <img src="assets/logo.svg" alt="Ziehler Lawn Care" class="logo-mark">
+      <h3>A greener lawn starts with a custom quote.</h3>
+      <ul>
+        <li><svg class="i"><use href="#i-check"/></svg>Pricing based on your property</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Lawn measured with aerial mapping</li>
+        <li><svg class="i"><use href="#i-check"/></svg>Help choosing the right program</li>
+      </ul>
+      <div class="modal__aside-call">Prefer to talk to someone?<a href="tel:+19373129575">(937) 312-9575</a></div>
+    </div>
+
+    <div class="modal__main">
+      <button class="modal__close" data-close-modal aria-label="Close quote form"><svg class="i"><use href="#i-x"/></svg></button>
+
+      <div id="quoteFormWrap">
+        <h2 id="quoteTitle">Get Your Free Quote</h2>
+        <p>Tell us a little about you and your property. It only takes a minute.</p>
+        <form id="quoteForm" novalidate>
+          <div class="form-grid">
+            <div class="field field--full">
+              <label for="qName">Full Name <span class="req">*</span></label>
+              <input id="qName" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required>
+              <span class="field__error" id="qName-err">Please enter your full name.</span>
+            </div>
+            <div class="field">
+              <label for="qEmail">Email Address <span class="req">*</span></label>
+              <input id="qEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required>
+              <span class="field__error" id="qEmail-err">Please enter a valid email address.</span>
+            </div>
+            <div class="field">
+              <label for="qPhone">Phone Number <span class="req">*</span></label>
+              <input id="qPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 555-5555" required>
+              <span class="field__error" id="qPhone-err">Please enter a 10-digit phone number.</span>
+            </div>
+            <div class="field">
+              <label for="qZip">ZIP Code <span class="req">*</span></label>
+              <input id="qZip" name="zip" type="text" autocomplete="postal-code" inputmode="numeric" maxlength="5" placeholder="45459" required>
+              <span class="field__error" id="qZip-err">Please enter a 5-digit ZIP code.</span>
+            </div>
+            <div class="field">
+              <label for="qService">Service Interested In <span class="req">*</span></label>
+              <select id="qService" name="service" required>
+                <option value="">Select a service</option>
+                <option>Lawn Care</option>
+                <option>Aeration &amp; Seeding</option>
+                <option>Pest Control</option>
+                <option>Mosquito Control</option>
+                <option>Tree &amp; Shrub Care</option>
+                <option>Landscape Bed Weed Control</option>
+                <option>Not sure – help me choose</option>
+              </select>
+              <span class="field__error" id="qService-err">Please choose a service.</span>
+            </div>
+          </div>
+          <div class="form-foot">
+            <button type="submit" class="btn btn-primary" id="quoteSubmit"><span class="spinner" aria-hidden="true"></span>Submit Request <svg class="i i-arrow"><use href="#i-arrow"/></svg></button>
+            <p class="form-note"><svg class="i"><use href="#i-lock"/></svg>Prototype form — no information is sent or stored.</p>
+          </div>
+        </form>
+      </div>
+
+      <div class="form-success" id="quoteSuccess" role="status" aria-live="polite">
+        <div class="form-success__icon"><svg class="i"><use href="#i-check"/></svg></div>
+        <h2 id="successTitle">Thanks, <span id="successName">neighbor</span>!</h2>
+        <p>This is where your request would be routed to the Ziehler team, who would follow up to prepare your custom quote.</p>
+        <span class="demo-note"><svg class="i"><use href="#i-info"/></svg>Prototype demo — no request was submitted.</span>
+        <div><button class="btn btn-dark" data-close-modal>Back to the Homepage</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s, c){ return (c || document).querySelector(s); };
+  var $$ = function(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+  var body = document.body;
+
+  /* ---------- Sticky header ---------- */
+  var header = $('#siteHeader');
+  var mobileCta = $('#mobileCta');
+  var hero = $('.hero');
+  function onScroll(){
+    var y = window.scrollY;
+    header.classList.toggle('is-solid', y > 40);
+    if (mobileCta) mobileCta.classList.toggle('is-visible', y > hero.offsetHeight * 0.75);
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  /* ---------- Active nav state ---------- */
+  var navLinks = $$('.main-nav a');
+  var sectionMap = { services:'service-lawn', about:'about', areas:'areas', contact:'contact' };
+  if ('IntersectionObserver' in window){
+    var navObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        var target = sectionMap[e.target.id] || e.target.id;
+        navLinks.forEach(function(a){ a.classList.toggle('is-active', a.getAttribute('href') === '#' + target); });
+      });
+    }, { rootMargin:'-45% 0px -50% 0px' });
+    ['about','services','areas','contact'].forEach(function(id){ var el = document.getElementById(id); if (el) navObs.observe(el); });
+  }
+
+  /* ---------- Highlight service card when navigated to ---------- */
+  $$('[data-highlight]').forEach(function(a){
+    a.addEventListener('click', function(){
+      var card = document.getElementById(a.getAttribute('data-highlight'));
+      if (!card) return;
+      $$('.service-card.is-highlight').forEach(function(c){ c.classList.remove('is-highlight'); });
+      setTimeout(function(){ card.classList.add('is-highlight'); }, 450);
+      setTimeout(function(){ card.classList.remove('is-highlight'); }, 2600);
+    });
+  });
+
+  /* ---------- Focus trap helper ---------- */
+  var lastFocus = null;
+  function trapFocus(container, e){
+    if (e.key !== 'Tab') return;
+    var f = $$('a[href], button:not([disabled]), input, select, textarea, [tabindex]:not([tabindex="-1"])', container)
+      .filter(function(el){ return el.offsetParent !== null; });
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+  }
+
+  /* ---------- Mobile menu ---------- */
+  var menu = $('#mobileMenu');
+  var toggle = $('#menuToggle');
+  function openMenu(){
+    lastFocus = document.activeElement;
+    menu.classList.add('is-open'); menu.setAttribute('aria-hidden','false');
+    toggle.setAttribute('aria-expanded','true'); body.classList.add('no-scroll');
+    setTimeout(function(){ $('.mobile-menu__close', menu).focus(); }, 50);
+  }
+  function closeMenu(restore){
+    if (!menu.classList.contains('is-open')) return;
+    menu.classList.remove('is-open'); menu.setAttribute('aria-hidden','true');
+    toggle.setAttribute('aria-expanded','false'); body.classList.remove('no-scroll');
+    if (restore !== false && lastFocus) lastFocus.focus();
+  }
+  toggle.addEventListener('click', openMenu);
+  $$('[data-close-menu]').forEach(function(el){ el.addEventListener('click', function(){ closeMenu(); }); });
+  $$('.mobile-menu nav a').forEach(function(a){ a.addEventListener('click', function(){ closeMenu(false); }); });
+  menu.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); trapFocus(menu, e); });
+  window.addEventListener('resize', function(){ if (window.innerWidth > 1100) closeMenu(false); });
+
+  /* ---------- Quote modal ---------- */
+  var modal = $('#quoteModal');
+  var form = $('#quoteForm');
+  var formWrap = $('#quoteFormWrap');
+  var success = $('#quoteSuccess');
+  var serviceSelect = $('#qService');
+
+  function openModal(service){
+    closeMenu(false);
+    lastFocus = document.activeElement;
+    resetForm();
+    if (service){
+      $$('option', serviceSelect).forEach(function(o){ if (o.value === service || o.textContent === service) serviceSelect.value = o.value; });
+    }
+    modal.classList.add('is-open'); modal.setAttribute('aria-hidden','false'); body.classList.add('no-scroll');
+    setTimeout(function(){ $('#qName').focus(); }, 80);
+  }
+  function closeModal(){
+    modal.classList.remove('is-open'); modal.setAttribute('aria-hidden','true'); body.classList.remove('no-scroll');
+    if (lastFocus) lastFocus.focus();
+  }
+  $$('[data-open-quote]').forEach(function(btn){
+    btn.addEventListener('click', function(e){ e.preventDefault(); openModal(btn.getAttribute('data-service')); });
+  });
+  modal.addEventListener('click', function(e){ if (e.target.closest('[data-close-modal]')) closeModal(); });
+  modal.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); trapFocus(modal, e); });
+
+  /* Validation */
+  var rules = {
+    qName:   function(v){ return v.trim().split(/\s+/).filter(Boolean).length >= 2 && v.trim().length >= 3; },
+    qEmail:  function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); },
+    qPhone:  function(v){ return v.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'').length === 10; },
+    qZip:    function(v){ return /^\d{5}$/.test(v.trim()); },
+    qService:function(v){ return v !== ''; }
+  };
+  function validateField(id){
+    var input = document.getElementById(id);
+    var ok = rules[id](input.value);
+    var field = input.closest('.field');
+    field.classList.toggle('is-invalid', !ok);
+    input.setAttribute('aria-invalid', ok ? 'false' : 'true');
+    if (!ok) input.setAttribute('aria-describedby', id + '-err'); else input.removeAttribute('aria-describedby');
+    return ok;
+  }
+  Object.keys(rules).forEach(function(id){
+    var el = document.getElementById(id);
+    el.addEventListener('blur', function(){ if (el.value) validateField(id); });
+    el.addEventListener('input', function(){ if (el.closest('.field').classList.contains('is-invalid')) validateField(id); });
+    el.addEventListener('change', function(){ if (el.closest('.field').classList.contains('is-invalid')) validateField(id); });
+  });
+  /* Phone auto-format */
+  $('#qPhone').addEventListener('input', function(e){
+    var d = e.target.value.replace(/\D/g,'').slice(0, 11);
+    if (d.length === 11 && d[0] === '1') d = d.slice(1);
+    d = d.slice(0,10);
+    var out = d;
+    if (d.length > 6) out = '(' + d.slice(0,3) + ') ' + d.slice(3,6) + '-' + d.slice(6);
+    else if (d.length > 3) out = '(' + d.slice(0,3) + ') ' + d.slice(3);
+    e.target.value = out;
+  });
+  $('#qZip').addEventListener('input', function(e){ e.target.value = e.target.value.replace(/\D/g,'').slice(0,5); });
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var firstInvalid = null;
+    Object.keys(rules).forEach(function(id){ if (!validateField(id) && !firstInvalid) firstInvalid = document.getElementById(id); });
+    if (firstInvalid){ firstInvalid.focus(); return; }
+    var btn = $('#quoteSubmit');
+    btn.classList.add('is-loading'); btn.setAttribute('aria-busy','true');
+    setTimeout(function(){
+      btn.classList.remove('is-loading'); btn.removeAttribute('aria-busy');
+      $('#successName').textContent = $('#qName').value.trim().split(/\s+/)[0];
+      formWrap.hidden = true;
+      success.classList.add('is-shown');
+      $('.btn', success).focus();
+    }, 1200);
+  });
+  function resetForm(){
+    form.reset();
+    $$('.field', form).forEach(function(f){ f.classList.remove('is-invalid'); });
+    $$('input, select', form).forEach(function(i){ i.removeAttribute('aria-invalid'); i.removeAttribute('aria-describedby'); });
+    formWrap.hidden = false;
+    success.classList.remove('is-shown');
+  }
+
+  /* ---------- Testimonial carousel ---------- */
+  var track = $('#carouselTrack');
+  var slides = $$('.slide', track);
+  var dotsWrap = $('#carouselDots');
+  var counter = $('#carouselCounter');
+  var carousel = $('#carousel');
+  var index = 0, timer = null;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  slides.forEach(function(s, i){
+    var d = document.createElement('button');
+    d.className = 'carousel__dot'; d.setAttribute('role','tab');
+    d.setAttribute('aria-label','Show testimonial ' + (i + 1));
+    d.addEventListener('click', function(){ go(i); restart(); });
+    dotsWrap.appendChild(d);
+  });
+  var dots = $$('.carousel__dot', dotsWrap);
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+  function go(i){
+    index = (i + slides.length) % slides.length;
+    track.style.transform = 'translateX(' + (-index * 100) + '%)';
+    slides.forEach(function(s, k){ s.setAttribute('aria-hidden', k === index ? 'false' : 'true'); });
+    dots.forEach(function(d, k){ d.setAttribute('aria-current', k === index ? 'true' : 'false'); d.setAttribute('aria-selected', k === index ? 'true' : 'false'); });
+    counter.textContent = pad(index + 1) + ' / ' + pad(slides.length);
+  }
+  function start(){ if (!reduce) timer = setInterval(function(){ go(index + 1); }, 7000); }
+  function stop(){ clearInterval(timer); timer = null; }
+  function restart(){ stop(); start(); }
+  $('#prevBtn').addEventListener('click', function(){ go(index - 1); restart(); });
+  $('#nextBtn').addEventListener('click', function(){ go(index + 1); restart(); });
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+  carousel.addEventListener('focusin', stop);
+  carousel.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowLeft'){ go(index - 1); }
+    if (e.key === 'ArrowRight'){ go(index + 1); }
+  });
+  /* Swipe */
+  var sx = null, sy = null;
+  track.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; stop(); }, { passive:true });
+  track.addEventListener('touchend', function(e){
+    if (sx === null) return;
+    var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+    sx = null; start();
+  });
+  go(0); start();
+  /* ---------- Scroll reveal ---------- */
+  var reveals = $$('.reveal, .final-cta__box');
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+    }, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
+    reveals.forEach(function(el){ io.observe(el); });
+  } else {
+    reveals.forEach(function(el){ el.classList.add('is-visible'); });
+  }
+})();
+</script>
+</body>
+</html>
